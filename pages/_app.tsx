@@ -1,0 +1,86 @@
+import React, { useEffect } from 'react'
+import NoSSR from 'react-no-ssr'
+import type { AppType } from 'next/app'
+import Head from 'next/head'
+import { Inter, Flow_Circular } from '@next/font/google'
+import { trpc } from 'utils/trpc'
+import { ChakraProvider } from '@chakra-ui/react'
+import './style.css'
+import { clearPlayerGame, setError, useResults } from 'store'
+import { Errors } from 'game/types'
+import { useRouter } from 'next/router'
+
+class ErrorBoundary extends React.Component<{ children: any }, { hasError: boolean }> {
+  constructor(props: any) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(error: any) {
+    return { hasError: true }
+  }
+
+  componentDidCatch(error: any, errorInfo: any) {
+    console.error('<ErrorBoundary>')
+    console.error(error)
+    console.error(errorInfo)
+    console.error('</ErrorBoundary>')
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return 'Oopsie'
+    }
+
+    return this.props.children
+  }
+}
+
+const font = Inter({ subsets: ['latin'] })
+
+const App = ({ children }: any) => {
+  const { error } = useResults()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!error) return
+
+    switch (error) {
+      case Errors.GAME_NOT_FOUND: {
+        setError(undefined)
+        alert('That game does not exist anymore')
+        clearPlayerGame()
+        router.push('/')
+        break
+      }
+    }
+  }, [error, router])
+
+  return (
+    <div>
+      <Head>
+        <title>Amerikaner</title>
+        <meta property="og:title" content="Amerikaner" />
+        <meta name="robots" content="noindex" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <main className={font.className}>
+        <ErrorBoundary>
+          <ChakraProvider>{children}</ChakraProvider>
+        </ErrorBoundary>
+      </main>
+    </div>
+  )
+}
+
+const MyApp: AppType = ({ Component, pageProps }) => {
+  return (
+    <NoSSR>
+      <App>
+        <Component {...pageProps} />
+      </App>
+    </NoSSR>
+  )
+}
+
+export default trpc.withTRPC(MyApp)
