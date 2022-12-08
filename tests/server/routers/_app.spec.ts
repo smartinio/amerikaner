@@ -1,5 +1,6 @@
 import { AppRouter, appRouter } from 'server/routers/_app'
 import { inferProcedureInput } from '@trpc/server'
+import { isObservable } from '@trpc/server/observable'
 import { games } from 'game/store'
 import { Game, isError, Player, Results } from 'game/types'
 import { CARDS } from 'game/constants'
@@ -16,6 +17,7 @@ describe('app: happy flow', () => {
   const caller = appRouter.createCaller({})
   let gameId = ''
   let ownerId = ''
+  let ownerSecret = ''
   let game: Game
 
   let player1: Player
@@ -44,6 +46,7 @@ describe('app: happy flow', () => {
 
       expect(result).toEqual({
         playerId: expect.any(String),
+        playerSecret: expect.any(String),
         gameId: expect.any(String),
       })
 
@@ -53,6 +56,7 @@ describe('app: happy flow', () => {
 
       gameId = result.gameId
       ownerId = result.playerId
+      ownerSecret = result.playerSecret
     })
 
     test.each([2, 3, 4])('Player %s can join the game', async (n) => {
@@ -66,15 +70,35 @@ describe('app: happy flow', () => {
 
       expect(result).toEqual({
         playerId: expect.any(String),
+        playerSecret: expect.any(String),
         gameId: expect.any(String),
       })
+    })
 
-      expect(game.players).toHaveLength(n)
+    test('Player 1-4 could join', () => {
+      expect(game.players).toHaveLength(4)
+
+      player1 = game.players[0]
+      player2 = game.players[1]
+      player3 = game.players[2]
+      player4 = game.players[3]
+    })
+
+    test.each([1, 2, 3, 4])('Player %s can subscribe to snapshots', async (n) => {
+      const input: inferProcedureInput<AppRouter['snapshotSubscription']> = {
+        playerId: game.players[n - 1]!.id,
+        playerSecret: game.players[n -1]!.secret,
+        gameId,
+      }
+
+      const result = await caller.snapshotSubscription(input)
+
+      expect(isObservable(result)).toBe(true)
     })
 
     test('Player 1 can start the game', async () => {
       const input: inferProcedureInput<AppRouter['startNewRound']> = {
-        dealerId: ownerId,
+        dealerSecret: ownerSecret,
         gameId,
       }
 
@@ -88,11 +112,6 @@ describe('app: happy flow', () => {
       for (const player of game.players) {
         expect(player.cards.size).toEqual(13)
       }
-
-      player1 = game.players[0]
-      player2 = game.players[1]
-      player3 = game.players[2]
-      player4 = game.players[3]
     })
   })
 
@@ -101,7 +120,7 @@ describe('app: happy flow', () => {
       const input: inferProcedureInput<AppRouter['placeBid']> = {
         isAmerikaner: false,
         numTricks: 6,
-        playerId: player2.id,
+        playerSecret: player2.secret,
         gameId,
       }
 
@@ -115,7 +134,7 @@ describe('app: happy flow', () => {
 
     test('Player 3 can fold', async () => {
       const input: inferProcedureInput<AppRouter['foldBid']> = {
-        playerId: player3.id,
+        playerSecret: player3.secret,
         gameId,
       }
 
@@ -131,7 +150,7 @@ describe('app: happy flow', () => {
       const input: inferProcedureInput<AppRouter['placeBid']> = {
         isAmerikaner: false,
         numTricks: 8,
-        playerId: player4.id,
+        playerSecret: player4.secret,
         gameId,
       }
 
@@ -145,7 +164,7 @@ describe('app: happy flow', () => {
 
     test('Player 1 can fold', async () => {
       const input: inferProcedureInput<AppRouter['foldBid']> = {
-        playerId: player1.id,
+        playerSecret: player1.secret,
         gameId,
       }
 
@@ -161,7 +180,7 @@ describe('app: happy flow', () => {
       const input: inferProcedureInput<AppRouter['placeBid']> = {
         isAmerikaner: false,
         numTricks: 9,
-        playerId: player2.id,
+        playerSecret: player2.secret,
         gameId,
       }
 
@@ -177,7 +196,7 @@ describe('app: happy flow', () => {
       const input: inferProcedureInput<AppRouter['placeBid']> = {
         isAmerikaner: false,
         numTricks: 10,
-        playerId: player4.id,
+        playerSecret: player4.secret,
         gameId,
       }
 
@@ -191,7 +210,7 @@ describe('app: happy flow', () => {
 
     test('Player 2 can fold, making Player 4 bid winner', async () => {
       const input: inferProcedureInput<AppRouter['foldBid']> = {
-        playerId: player2.id,
+        playerSecret: player2.secret,
         gameId,
       }
 
@@ -210,7 +229,7 @@ describe('app: happy flow', () => {
         const input: inferProcedureInput<AppRouter['playBindingTrick']> = {
           startingCard: { id: mockPlayer4Cards['clubs:2'].id },
           bindingCard: { id: mockPlayer2Cards['clubs:14'].id },
-          playerId: player4.id,
+          playerSecret: player4.secret,
           gameId,
         }
 
@@ -227,7 +246,7 @@ describe('app: happy flow', () => {
       test('Player 1 can play next', async () => {
         const input: inferProcedureInput<AppRouter['playRegularTrick']> = {
           card: { id: mockPlayer1Cards['clubs:3'].id },
-          playerId: player1.id,
+          playerSecret: player1.secret,
           gameId,
         }
 
@@ -242,7 +261,7 @@ describe('app: happy flow', () => {
       test('Player 3 can play next', async () => {
         const input: inferProcedureInput<AppRouter['playRegularTrick']> = {
           card: { id: mockPlayer3Cards['clubs:10'].id },
-          playerId: player3.id,
+          playerSecret: player3.secret,
           gameId,
         }
 
@@ -256,7 +275,7 @@ describe('app: happy flow', () => {
 
       test('Player 2 can collect the trick and starts the next trick', async () => {
         const input: inferProcedureInput<AppRouter['collectTrick']> = {
-          playerId: player2.id,
+          playerSecret: player2.secret,
           gameId,
         }
 
@@ -295,7 +314,7 @@ describe('app: happy flow', () => {
 
           const input: inferProcedureInput<AppRouter['playRegularTrick']> = {
             card: { id: cardToPlay.id },
-            playerId: currentPlayer.id,
+            playerSecret: currentPlayer.secret,
             gameId,
           }
 
@@ -308,7 +327,7 @@ describe('app: happy flow', () => {
 
           if (game.round.phase === 'collecting') {
             const result = await caller.collectTrick({
-              playerId: game.round.currentPlayer.id,
+              playerSecret: game.round.currentPlayer.secret,
               gameId,
             })
 
@@ -337,7 +356,7 @@ describe('app: happy flow', () => {
         const { dealer } = game
 
         const input: inferProcedureInput<AppRouter['startNewRound']> = {
-          dealerId: dealer.id,
+          dealerSecret: dealer.secret,
           gameId,
         }
 
@@ -361,12 +380,12 @@ describe('app: happy flow', () => {
             lastBidAmount > 11
           ) {
             await caller.foldBid({
-              playerId: player.id,
+              playerSecret: player.secret,
               gameId,
             })
           } else {
             await caller.placeBid({
-              playerId: player.id,
+              playerSecret: player.secret,
               gameId,
               numTricks: lastBidAmount + 1,
               isAmerikaner: false,
@@ -390,7 +409,7 @@ describe('app: happy flow', () => {
             const input: inferProcedureInput<AppRouter['playBindingTrick']> = {
               startingCard: { id: worstTrumpCard.id },
               bindingCard: { id: bestOtherTrumpCard.id },
-              playerId: currentPlayer.id,
+              playerSecret: currentPlayer.secret,
               gameId,
             }
 
@@ -413,7 +432,7 @@ describe('app: happy flow', () => {
 
             const input: inferProcedureInput<AppRouter['playRegularTrick']> = {
               card: { id: cardToPlay.id },
-              playerId: currentPlayer.id,
+              playerSecret: currentPlayer.secret,
               gameId,
             }
 
@@ -427,7 +446,7 @@ describe('app: happy flow', () => {
 
           if (game.round.phase === 'collecting') {
             const result = await caller.collectTrick({
-              playerId: game.round.currentPlayer.id,
+              playerSecret: game.round.currentPlayer.secret,
               gameId,
             })
 

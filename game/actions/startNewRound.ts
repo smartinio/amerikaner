@@ -11,7 +11,7 @@ export const startNewRound = publicProcedure
   .input(
     z.object({
       gameId: z.string(),
-      dealerId: z.string(),
+      dealerSecret: z.string(),
     })
   )
   .mutation(({ input }) => {

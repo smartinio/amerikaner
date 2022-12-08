@@ -22,26 +22,31 @@ export const setResult = (result?: Results) => useResults.setState({ result })
 interface PlayerGame {
   gameId: string
   playerId: string
+  playerSecret: string
 }
 
 export const usePlayerGame = create<PlayerGame, [['zustand/persist', PlayerGame]]>(
-  persist(() => ({ gameId: '', playerId: '' }), {
+  persist(() => ({ gameId: '', playerId: '', playerSecret: '' }), {
     name: 'player-game-storage',
   })
 )
 
 export const clearPlayerGame = () => {
-  usePlayerGame.setState(() => ({ gameId: '', playerId: '' }))
+  usePlayerGame.setState(() => ({ gameId: '', playerId: '', playerSecret: '' }))
 }
 
 export const setPlayerId = ({ playerId }: { playerId: string }) => {
   usePlayerGame.setState((state) => ({ ...state, playerId }))
 }
 
+export const setPlayerSecret = ({ playerSecret }: { playerSecret: string }) => {
+  usePlayerGame.setState((state) => ({ ...state, playerSecret }))
+}
+
 export const setGameId = ({ gameId }: { gameId: string }) => {
   usePlayerGame.setState((state) => ({ ...state, gameId }))
 }
 
-export const setPlayerGame = (params: { playerId?: string; gameId?: string }) => {
+export const setPlayerGame = (params: { playerId?: string; playerSecret?: string; gameId?: string }) => {
   usePlayerGame.setState(params)
 }

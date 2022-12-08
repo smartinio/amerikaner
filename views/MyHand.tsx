@@ -52,7 +52,7 @@ export const MyHand = () => {
     return null
   }
 
-  const { gameId, playerId } = snapshot
+  const { gameId, playerSecret } = snapshot
 
   const getCardStyle = (cardId: string) => {
     const transition = 'all 0.2s ease'
@@ -103,13 +103,13 @@ export const MyHand = () => {
     const startingCard = selectedCard
 
     if (bindingCard && startingCard) {
-      playBindingTrickMutation.mutate({ gameId, playerId, bindingCard, startingCard })
+      playBindingTrickMutation.mutate({ gameId, playerSecret, bindingCard, startingCard })
     }
   }
 
   const playRegularTrick = () => {
     if (selectedCard) {
-      playRegularTrickMutation.mutate({ gameId, playerId, card: selectedCard })
+      playRegularTrickMutation.mutate({ gameId, playerSecret, card: selectedCard })
     }
   }
 

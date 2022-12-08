@@ -16,9 +16,10 @@ import Image from 'next/legacy/image'
 interface Props {
   gameId: string
   playerId: string
+  playerSecret: string
 }
 
-export const Game = ({ gameId, playerId }: Props) => {
+export const Game = ({ gameId, playerId, playerSecret }: Props) => {
   const router = useRouter()
   const { error } = useResults()
   const { snapshot } = useSnapshot()
@@ -29,7 +30,7 @@ export const Game = ({ gameId, playerId }: Props) => {
   keepAlive.current = false
 
   trpc.snapshotSubscription.useSubscription(
-    { playerId, gameId },
+    { playerId, playerSecret, gameId },
     {
       onError: (error) => {
         console.error('Subscription error', error)
@@ -46,7 +47,7 @@ export const Game = ({ gameId, playerId }: Props) => {
   )
 
   const keepAliveQuery = trpc.keepAlive.useQuery(
-    { gameId, playerId },
+    { gameId, playerSecret },
     { onSuccess: defaultDataHandler }
   )
 

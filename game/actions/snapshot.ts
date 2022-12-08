@@ -11,6 +11,7 @@ export const snapshotQuery = publicProcedure
     z.object({
       gameId: z.string(),
       playerId: z.string(),
+      playerSecret: z.string(),
     })
   )
   .query(({ input }) => {
@@ -32,6 +33,7 @@ export const snapshotSubscription = publicProcedure
     z.object({
       gameId: z.string(),
       playerId: z.string(),
+      playerSecret: z.string(),
     })
   )
   .subscription(({ input }) => {

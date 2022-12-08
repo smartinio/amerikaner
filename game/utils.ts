@@ -52,11 +52,13 @@ export const createTrick = ({ ...overrides }: Partial<Trick>): Trick => {
 
 export const createPlayer = ({
   id,
+  secret,
   name,
   ...overrides
-}: { id: string; name: string } & Partial<Player>): Player => {
+}: { id: string; name: string; secret: string } & Partial<Player>): Player => {
   return {
     id,
+    secret,
     name,
     cards: new Set(),
     score: 0,

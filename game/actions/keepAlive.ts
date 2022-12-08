@@ -7,7 +7,7 @@ export const keepAlive = publicProcedure
   .input(
     z.object({
       gameId: z.string(),
-      playerId: z.string(),
+      playerSecret: z.string(),
     })
   )
   .query(({ input }) => {

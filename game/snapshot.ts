@@ -37,6 +37,7 @@ export type TeamSnapshot = {
 export type Snapshot = {
   gameId: string
   playerId: string
+  playerSecret: string
   currentPlayerId: string
   isMyTurn: boolean
   myCards: Card[]
@@ -111,6 +112,7 @@ export const createSnapshot = (params: { player: Player; game: Game }): Snapshot
   return {
     gameId: game.id,
     playerId: player.id,
+    playerSecret: player.secret,
     startingCard: last(game.round.tricks)?.playedCards[0]?.card,
     currentPlayerId: game.round.currentPlayer.id,
     isMyTurn: game.round.currentPlayer.id === player.id,

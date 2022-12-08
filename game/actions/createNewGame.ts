@@ -21,6 +21,7 @@ export const createNewGame = publicProcedure
   .mutation(({ input }) => {
     const owner = createPlayer({
       id: uuid(),
+      secret: uuid(),
       name: input.playerName,
     })
 
@@ -41,6 +42,7 @@ export const createNewGame = publicProcedure
 
     return {
       playerId: owner.id,
+      playerSecret: owner.secret,
       gameId: game.id,
     }
   })

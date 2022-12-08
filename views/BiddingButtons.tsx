@@ -34,14 +34,14 @@ export const BiddingButtons = () => {
     return null
   }
 
-  const { playerId, gameId, isMyTurn } = snapshot
+  const { playerSecret, gameId, isMyTurn } = snapshot
 
   const foldBid = () => {
-    foldBidMutation.mutate({ playerId, gameId })
+    foldBidMutation.mutate({ playerSecret, gameId })
   }
 
   const placeBid = () => {
-    placeBidMutation.mutate({ playerId, gameId, isAmerikaner: false, numTricks: bid })
+    placeBidMutation.mutate({ playerSecret, gameId, isAmerikaner: false, numTricks: bid })
   }
 
   return (

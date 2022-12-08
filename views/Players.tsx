@@ -144,6 +144,7 @@ const Player = (props: {
     roundPhase,
     highestBid,
     playerId,
+    playerSecret,
     currentPlayerId,
     startingCard,
     gamePhase,
@@ -181,7 +182,7 @@ const Player = (props: {
     const shouldKick = confirm(`Are you sure you want to kick ${player.name}?`)
 
     if (shouldKick) {
-      kickPlayerMutation.mutate({ gameId, ownerId: playerId, playerIdToKick: player.id })
+      kickPlayerMutation.mutate({ gameId, ownerSecret: playerSecret, playerIdToKick: player.id })
     }
   }
 

@@ -9,7 +9,7 @@ export const kickPlayer = publicProcedure
   .input(
     z.object({
       gameId: z.string(),
-      ownerId: z.string(),
+      ownerSecret: z.string(),
       playerIdToKick: z.string(),
     })
   )

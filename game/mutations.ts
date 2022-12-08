@@ -112,7 +112,7 @@ export const mutate = {
     const { game, player } = params
 
     if (game.players.length === 1) {
-      const result = destroyGameAsOwner({ gameId: game.id, ownerId: player.id })
+      const result = destroyGameAsOwner({ gameId: game.id, ownerSecret: player.secret })
 
       if (result) {
         return result

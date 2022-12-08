@@ -24,7 +24,7 @@ const trumpColor: Record<Suit, ThemeTypings['colors']> = {
 
 export const MiddleArea = () => {
   const { snapshot } = useSnapshot()
-  const { gameId, playerId } = usePlayerGame()
+  const { gameId, playerSecret } = usePlayerGame()
   const mutationOptions = { onSuccess: defaultDataHandler }
   const collectTrickMutation = trpc.collectTrick.useMutation(mutationOptions)
   const startNewRoundMutation = trpc.startNewRound.useMutation(mutationOptions)
@@ -34,11 +34,11 @@ export const MiddleArea = () => {
   }
 
   const startNewRound = () => {
-    startNewRoundMutation.mutate({ gameId, dealerId: playerId })
+    startNewRoundMutation.mutate({ gameId, dealerSecret: playerSecret })
   }
 
   const collectTrick = () => {
-    collectTrickMutation.mutate({ gameId, playerId })
+    collectTrickMutation.mutate({ gameId, playerSecret })
   }
 
   const { gamePhase, roundPhase, isMyTurn, trumpSuit, canStart } = snapshot

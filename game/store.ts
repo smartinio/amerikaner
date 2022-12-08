@@ -41,7 +41,7 @@ export const getGameAsOutsider = (params: { gameId: string; password?: string })
   return { game }
 }
 
-export const getGameAsCurrentPlayer = (params: { gameId: string; playerId: string }) => {
+export const getGameAsCurrentPlayer = (params: { gameId: string; playerSecret: string }) => {
   const game = games.get(params.gameId)
 
   if (!game) {
@@ -50,15 +50,15 @@ export const getGameAsCurrentPlayer = (params: { gameId: string; playerId: strin
 
   const player = game.round.currentPlayer
 
-  if (player.id !== params.playerId) {
-    console.error('Player', params.playerId, 'is not current player:', player.id)
+  if (player.secret !== params.playerSecret) {
+    console.error('Player secret', params.playerSecret, 'is not bound to current player id:', player.id)
     return Errors.FORBIDDEN
   }
 
   return { game, player }
 }
 
-export const getGameAsOwner = (params: { gameId: string; ownerId: string }) => {
+export const getGameAsOwner = (params: { gameId: string; ownerSecret: string }) => {
   const game = games.get(params.gameId)
 
   if (!game) {
@@ -67,15 +67,15 @@ export const getGameAsOwner = (params: { gameId: string; ownerId: string }) => {
 
   const { owner } = game
 
-  if (owner.id !== params.ownerId) {
-    console.error('Player', params.ownerId, 'is not owner:', owner.id)
+  if (owner.secret !== params.ownerSecret) {
+    console.error('Player secret', params.ownerSecret, 'is not bound to owner id:', owner.id)
     return Errors.FORBIDDEN
   }
 
   return { game, owner }
 }
 
-export const getGameAsDealer = (params: { gameId: string; dealerId: string }) => {
+export const getGameAsDealer = (params: { gameId: string; dealerSecret: string }) => {
   const game = games.get(params.gameId)
 
   if (!game) {
@@ -84,25 +84,25 @@ export const getGameAsDealer = (params: { gameId: string; dealerId: string }) =>
 
   const { dealer } = game
 
-  if (dealer.id !== params.dealerId) {
-    console.error('Player', params.dealerId, 'is not dealer:', dealer.id)
+  if (dealer.secret !== params.dealerSecret) {
+    console.error('Player secret', params.dealerSecret, 'is not bound to dealer id:', dealer.id)
     return Errors.FORBIDDEN
   }
 
   return { game, dealer }
 }
 
-export const getGameAsPlayer = (params: { gameId: string; playerId: string }) => {
+export const getGameAsPlayer = (params: { gameId: string; playerSecret: string }) => {
   const game = games.get(params.gameId)
 
   if (!game) {
     return Errors.GAME_NOT_FOUND
   }
 
-  const player = game.players.find((player) => player.id === params.playerId)
+  const player = game.players.find((player) => player.secret === params.playerSecret)
 
   if (!player) {
-    console.error('Player', params.playerId, 'is not in game:', params.gameId)
+    console.error('Player secret', params.playerSecret, 'is not bound to any player in game:', params.gameId)
     return Errors.FORBIDDEN
   }
 
@@ -128,15 +128,15 @@ export const storeGame = <T extends Omit<Game, 'id'>>(params: T) => {
   return { game }
 }
 
-export const destroyGameAsOwner = (params: { gameId: string; ownerId: string }) => {
+export const destroyGameAsOwner = (params: { gameId: string; ownerSecret: string }) => {
   const game = games.get(params.gameId)
 
   if (!game) {
     return Errors.GAME_NOT_FOUND
   }
 
-  if (game && game.owner.id !== params.ownerId) {
-    console.error('Cannot destroy. Player', params.ownerId, 'is not owner:', game.owner.id)
+  if (game && game.owner.secret !== params.ownerSecret) {
+    console.error('Cannot destroy. Player secret', params.ownerSecret, 'is not bound to owner id:', game.owner.id)
     return Errors.FORBIDDEN
   }
 

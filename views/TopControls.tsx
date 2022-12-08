@@ -21,13 +21,13 @@ export const TopControls = () => {
     return null
   }
 
-  const { gameId, playerId, gamePhase, name } = snapshot
+  const { gameId, playerSecret, gamePhase, name } = snapshot
 
   const leaveGame = () => {
     const shouldLeave = confirm('Are you sure you want to leave?')
 
     if (shouldLeave) {
-      leaveGameMutation.mutate({ gameId, playerId })
+      leaveGameMutation.mutate({ gameId, playerSecret })
     }
   }
 

@@ -4,6 +4,7 @@ export const stubPlayer = (overrides?: Partial<Player>): Player => {
   return {
     cards: new Set(),
     id: 'player-id',
+    secret: 'player-secret',
     name: 'player-name',
     score: 0,
     ...overrides,

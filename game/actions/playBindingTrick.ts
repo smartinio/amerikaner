@@ -13,7 +13,7 @@ export const playBindingTrick = publicProcedure
       gameId: z.string(),
       startingCard: schemas.card(),
       bindingCard: schemas.card(),
-      playerId: z.string(),
+      playerSecret: z.string(),
     })
   )
   .mutation(({ input }) => {

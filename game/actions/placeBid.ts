@@ -10,14 +10,14 @@ export const placeBid = publicProcedure
   .input(
     z.object({
       gameId: z.string(),
-      playerId: z.string(),
+      playerSecret: z.string(),
       numTricks: z.number(),
       isAmerikaner: z.boolean(),
     })
   )
   .mutation(({ input }) => {
-    const { gameId, playerId, numTricks, isAmerikaner } = input
-    const result = getGameAsCurrentPlayer({ playerId, gameId })
+    const { gameId, playerSecret, numTricks, isAmerikaner } = input
+    const result = getGameAsCurrentPlayer({ playerSecret, gameId })
 
     if (isError(result)) {
       return result

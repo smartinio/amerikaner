@@ -14,7 +14,7 @@ export const playRegularTrick = publicProcedure
     z.object({
       gameId: z.string(),
       card: schemas.card(),
-      playerId: z.string(),
+      playerSecret: z.string(),
     })
   )
   .mutation(({ input }) => {

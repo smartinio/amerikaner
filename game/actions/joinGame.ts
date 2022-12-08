@@ -42,6 +42,7 @@ export const joinGame = publicProcedure
     const outcome = (() => {
       const player = createPlayer({
         id: uuid(),
+        secret: uuid(),
         name: playerName,
       })
 
@@ -54,6 +55,7 @@ export const joinGame = publicProcedure
 
     return {
       playerId: outcome.player.id,
+      playerSecret: outcome.player.secret,
       gameId: game.id,
     }
   })

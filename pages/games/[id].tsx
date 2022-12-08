@@ -7,7 +7,7 @@ import { Start } from 'views/Start'
 
 const GameId = () => {
   const router = useRouter()
-  const { gameId, playerId } = usePlayerGame()
+  const { gameId, playerId, playerSecret } = usePlayerGame()
 
   useEffect(() => {
     if (typeof router.query.id === 'string' && gameId !== router.query.id) {
@@ -23,11 +23,11 @@ const GameId = () => {
     )
   }
 
-  if (!playerId) {
+  if (!playerId || !playerSecret) {
     return <Start />
   }
 
-  return <Game gameId={gameId} playerId={playerId} />
+  return <Game gameId={gameId} playerId={playerId} playerSecret={playerSecret} />
 }
 
 export default GameId

@@ -11,12 +11,12 @@ export const foldBid = publicProcedure
   .input(
     z.object({
       gameId: z.string(),
-      playerId: z.string(),
+      playerSecret: z.string(),
     })
   )
   .mutation(({ input }) => {
-    const { gameId, playerId } = input
-    const result = getGameAsCurrentPlayer({ playerId, gameId })
+    const { gameId, playerSecret } = input
+    const result = getGameAsCurrentPlayer({ playerSecret, gameId })
 
     if (isError(result)) {
       return result

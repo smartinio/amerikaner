@@ -12,7 +12,7 @@ export const collectTrick = publicProcedure
   .input(
     z.object({
       gameId: z.string(),
-      playerId: z.string(),
+      playerSecret: z.string(),
     })
   )
   .mutation(({ input }) => {
