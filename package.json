@@ -18,11 +18,11 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@next/font": "^13.0.3",
-    "@tanstack/react-query": "^4.14.3",
-    "@trpc/client": "^10.0.0-proxy-beta.26",
-    "@trpc/next": "^10.0.0-proxy-beta.26",
-    "@trpc/react-query": "^10.0.0-proxy-beta.26",
-    "@trpc/server": "^10.0.0-proxy-beta.26",
+    "@tanstack/react-query": "^4.19.1",
+    "@trpc/client": "^10.4.3",
+    "@trpc/next": "^10.4.3",
+    "@trpc/react-query": "^10.4.3",
+    "@trpc/server": "^10.4.3",
     "canvas-confetti": "^1.6.0",
     "framer-motion": "^7.6.4",
     "next": "13.0.3",
@@ -54,7 +54,7 @@
     "jest-mock-random": "^1.1.1",
     "ts-patch": "^2.0.2",
     "tsx": "^3.11.0",
-    "typescript": "4.8.4",
+    "typescript": "^4.9.4",
     "typescript-transform-paths": "^3.4.4"
   }
 }
