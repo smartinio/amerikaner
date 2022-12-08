@@ -4,7 +4,7 @@ import { Errors, isError } from 'game/types'
 import { publicProcedure } from 'server/trpc'
 import { createSnapshot } from 'game/snapshot'
 import { observable } from '@trpc/server/observable'
-import { emitter, SocketEvent } from 'game/emitter'
+import { emitter, getPlayerChannel, SocketEvent } from 'game/emitter'
 
 export const snapshotQuery = publicProcedure
   .input(
@@ -50,6 +50,8 @@ export const snapshotSubscription = publicProcedure
 
       emit.next(snapshot)
 
-      return emitter.subscribe(input.playerId, (data) => emit.next(data))
+      const playerChannel = getPlayerChannel(player)
+
+      return emitter.subscribe(playerChannel, (data) => emit.next(data))
     })
   })

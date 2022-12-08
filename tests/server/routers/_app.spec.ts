@@ -1,14 +1,14 @@
 import { AppRouter, appRouter } from 'server/routers/_app'
 import { inferProcedureInput } from '@trpc/server'
-import { isObservable } from '@trpc/server/observable'
 import { games } from 'game/store'
-import { Game, isError, Player, Results } from 'game/types'
+import { Errors, Game, isError, Player, Results } from 'game/types'
 import { CARDS } from 'game/constants'
 import { mockPlayer1Cards, mockPlayer2Cards, mockPlayer3Cards, mockPlayer4Cards } from './fixtures'
 import { dealCards } from 'game/dealCards'
 import { groupBySuit } from 'game/utils'
 import { last } from 'utils/last'
 import { mockRandom } from 'jest-mock-random'
+import { SocketEvent, updateClients } from 'game/emitter'
 
 const mockDealCards = dealCards as jest.Mock
 jest.mock('game/dealCards')
@@ -84,16 +84,32 @@ describe('app: happy flow', () => {
       player4 = game.players[3]
     })
 
-    test.each([1, 2, 3, 4])('Player %s can subscribe to snapshots', async (n) => {
+    test.each([0, 1, 2, 3])('Player N can subscribe to snapshots', async (n) => {
+      const player = game.players[n]
+
       const input: inferProcedureInput<AppRouter['snapshotSubscription']> = {
-        playerId: game.players[n - 1]!.id,
-        playerSecret: game.players[n -1]!.secret,
+        playerId: player.id,
+        playerSecret: player.secret,
         gameId,
       }
 
       const result = await caller.snapshotSubscription(input)
 
-      expect(isObservable(result)).toBe(true)
+      const eventPromise = new Promise<SocketEvent | Errors>((resolve) => {
+        result.subscribe({ next: resolve })
+      })
+
+      updateClients(game)
+
+      const event = await eventPromise
+
+      expect(isError(event)).toBe(false)
+
+      expect(event).toEqual(expect.objectContaining({
+        playerId: player.id,
+        playerSecret: player.secret,
+        gameId: game.id,
+      }))
     })
 
     test('Player 1 can start the game', async () => {
@@ -458,7 +474,7 @@ describe('app: happy flow', () => {
         }
       }
 
-      const winners = game.players.filter(player => player.score >= 52)
+      const winners = game.players.filter((player) => player.score >= 52)
       expect(winners).toHaveLength(1)
     })
   })

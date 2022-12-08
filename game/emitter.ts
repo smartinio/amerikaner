@@ -6,12 +6,16 @@ const ee = new EventEmitter()
 
 export type SocketEvent = Snapshot | 'KICKED'
 
+type PlayerChannel = string & {__brand: 'PlayerChannel'}
+
+export const getPlayerChannel = (player: Player) => `${player.id}:${player.secret}` as PlayerChannel
+
 export const emitter = {
-  notify: (playerId: string, snapshot: SocketEvent) => {
-    ee.emit(playerId, snapshot)
+  notify: (channel: PlayerChannel, snapshot: SocketEvent) => {
+    ee.emit(channel, snapshot)
   },
-  subscribe: (playerId: string, handler: (snapshot: SocketEvent) => void) => {
-    ee.on(playerId, handler)
+  subscribe: (channel: PlayerChannel, handler: (snapshot: SocketEvent) => void) => {
+    ee.on(channel, handler)
     return () => ee.off('snapshot', handler)
   },
 }
@@ -19,10 +23,12 @@ export const emitter = {
 export const updateClients = (game: Game) => {
   for (const player of game.players) {
     const snapshot = createSnapshot({ player, game })
-    emitter.notify(player.id, snapshot)
+    const playerChannel = getPlayerChannel(player)
+    emitter.notify(playerChannel, snapshot)
   }
 }
 
 export const notifyKickedPlayer = (player: Player) => {
-  emitter.notify(player.id, 'KICKED')
+  const playerChannel = getPlayerChannel(player)
+  emitter.notify(playerChannel, 'KICKED')
 }
