@@ -55,7 +55,7 @@
     "jest-mock-random": "^1.1.1",
     "ts-patch": "^2.0.2",
     "tsx": "^3.11.0",
-    "typescript": "^4.9.4",
+    "typescript": "^5.0.4",
     "typescript-transform-paths": "^3.4.4"
   }
 }
