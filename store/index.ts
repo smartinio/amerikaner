@@ -1,7 +1,7 @@
 import { Errors, Results } from 'game/types'
 import { Snapshot } from 'shared/types'
 import { persist } from 'zustand/middleware'
-import create from 'zustand'
+import { create } from 'zustand'
 
 export const useSnapshot = create(() => ({
   snapshot: undefined as Snapshot | undefined,
@@ -47,6 +47,10 @@ export const setGameId = ({ gameId }: { gameId: string }) => {
   usePlayerGame.setState((state) => ({ ...state, gameId }))
 }
 
-export const setPlayerGame = (params: { playerId?: string; playerSecret?: string; gameId?: string }) => {
+export const setPlayerGame = (params: {
+  playerId?: string
+  playerSecret?: string
+  gameId?: string
+}) => {
   usePlayerGame.setState(params)
 }
