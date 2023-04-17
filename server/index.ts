@@ -25,6 +25,9 @@ app.prepare().then(() => {
     }
   }).listen(port, () => {
     console.log(`> Ready on http://${hostname}:${port}`)
+    if (process.env.BOOT_TEST) {
+      setTimeout(() => process.exit(0), 3000)
+    }
   })
 
   createWSS(server)

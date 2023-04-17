@@ -10,6 +10,7 @@
     "start": "NODE_ENV=production node dist/server/index.js",
     "test:game": "jest --testEnvironment=node --passWithNoTests --forceExit --testPathPattern=tests/server/",
     "test:pages": "jest --testEnvironment=jsdom --passWithNoTests --forceExit --testPathPattern=tests/ui/",
+    "test:boot": "BOOT_TEST=1 yarn start",
     "test": "yarn test:game && yarn test:pages",
     "lint": "next lint"
   },
