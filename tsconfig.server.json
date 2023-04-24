@@ -11,12 +11,9 @@
       "game/*": ["game/*"],
       "server/*": ["server/*"],
       "shared/*": ["shared/*"],
-      "utils/*": ["utils/*"],
+      "utils/*": ["utils/*"]
     },
-    "plugins": [
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ]
+    "plugins": [{ "transform": "typescript-transform-paths" }]
   },
   "include": ["server/**/*.ts"]
 }
