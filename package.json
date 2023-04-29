@@ -8,6 +8,7 @@
     "dev": "NODE_ENV=development concurrently 'next dev' 'yarn ws-dev'",
     "build:client": "next build",
     "build:server": "rm -rf dist && NODE_OPTIONS=\"--max-old-space-size=4096\" tsc --p tsconfig.server.json",
+    "build": "yarn build:client && yarn build:server",
     "start": "NODE_ENV=production node dist/server/index.js",
     "test:game": "jest --testEnvironment=node --passWithNoTests --forceExit --testPathPattern=tests/server/",
     "test:pages": "jest --testEnvironment=jsdom --passWithNoTests --forceExit --testPathPattern=tests/ui/",
