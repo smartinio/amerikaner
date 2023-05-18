@@ -19,7 +19,7 @@ export const Start = () => {
   return (
     <Container marginTop="60px">
       <VStack>
-        <Heading>Amerikaner</Heading>
+        <Heading pb="8">Amerikaner</Heading>
         <Tabs
           variant="enclosed-colored"
           isFitted
