@@ -5657,10 +5657,10 @@ tree-kill@^1.2.2:
   resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
   integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
 
-ts-patch@3.0.0-rc3:
-  version "3.0.0-rc3"
-  resolved "https://registry.yarnpkg.com/ts-patch/-/ts-patch-3.0.0-rc3.tgz#88dcebbc9cc29e92fda4f8c2c290c82ba44b1a76"
-  integrity sha512-BDASAqVLJ+fCs0XqNXQCfdAXUZvKlxdOtg4PDYK1nkL5lYVKo+GVmTVPxiowjSf1TkBOezPUISIRutcJEmDxkA==
+ts-patch@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ts-patch/-/ts-patch-3.0.0.tgz#431d57fcce7bf4e6ffad2ced2767db75236b3146"
+  integrity sha512-chlOJBrZAF6dUEHw3JoADjw2pC4BU97+D7S7drDfM7VkwtSRXFLDCKzoEBUuAA+uxBPVyoVMt6InU3pM7SLU4A==
   dependencies:
     chalk "^4.1.2"
     global-prefix "^3.0.0"
