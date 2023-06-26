@@ -19,7 +19,7 @@
   "dependencies": {
     "@chakra-ui/react": "^2.7.0",
     "@dnd-kit/core": "^6.0.8",
-    "@emotion/react": "^11.11.0",
+    "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@tanstack/react-query": "^4.29.11",
     "@trpc/client": "^10.4.3",
