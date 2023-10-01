@@ -34,7 +34,7 @@
     "react-no-ssr": "^1.1.0",
     "uuid": "^9.0.0",
     "ws": "^8.10.0",
-    "zod": "^3.19.1",
+    "zod": "^3.22.2",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
