@@ -1,8 +1,7 @@
-// middleware.ts
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-function forceHTTPS(req: NextRequest) {
+export function middleware(req: NextRequest) {
   if (
     process.env.NODE_ENV === 'production' &&
     req.headers.get('x-forwarded-proto') !== 'https' &&
@@ -12,12 +11,6 @@ function forceHTTPS(req: NextRequest) {
   }
 }
 
-export function middleware(request: NextRequest) {
-  const httpsRedirect = forceHTTPS(request)
-
-  if (httpsRedirect) {
-    return httpsRedirect
-  }
-
-  return NextResponse.next()
+export const config = {
+  matcher: '/((?!ws$).*)', // match all except exactly /ws
 }
