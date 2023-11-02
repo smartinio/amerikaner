@@ -196,7 +196,7 @@ const Player = (props: {
               borderColor={isInTeam ? 'black' : 'gray.500'}
               borderWidth={isInTeam ? 'thick' : 'medium'}
               size="lg"
-              src={`https://avatars.dicebear.com/api/avataaars/${player.id}.svg`}
+              src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${player.id}&flip=${!isLeft}`}
             />
           </Box>
           {roundPhase === 'bidding' && player.folded ? (
