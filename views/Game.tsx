@@ -1,7 +1,7 @@
 import { Box, Code, Container, Flex, Spinner, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { trpc } from 'utils/trpc'
-import { Errors } from 'shared/types'
+import { Errors, isError } from 'shared/types'
 import { dataHandler, defaultDataHandler } from 'utils/data'
 import { Start } from 'views/Start'
 import { useSnapshot, setSnapshot, useResults, setError, clearPlayerGame } from 'store'
@@ -46,12 +46,13 @@ export const Game = ({ gameId, playerId, playerSecret }: Props) => {
     }
   )
 
-  const keepAliveQuery = trpc.keepAlive.useQuery(
-    { gameId, playerSecret },
-    { onSuccess: defaultDataHandler }
-  )
+  const keepAliveQuery = trpc.keepAlive.useQuery({ gameId, playerSecret })
 
   useEffect(() => {
+    if (isError(keepAliveQuery.data)) {
+      setError(keepAliveQuery.data)
+    }
+
     let httpInterval = setInterval(() => {
       if (keepAlive.current) {
         fetch('/api/keepalive') // keeps heroku happy on http
