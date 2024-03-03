@@ -4,7 +4,10 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": true,
+      "schedule": [
+        "before 4am on the first day of the month"
+      ]
     }
   ]
 }
