@@ -2037,24 +2037,24 @@
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
 "@trpc/client@^11.0.0-next.327":
-  version "11.0.0-next.327"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.0.0-next.327.tgz#22e0f2e40fdad7064ada0a8d1538d51c0c7a6a93"
-  integrity sha512-5Vhem/cavPizA0+CdGDWfJR0XSdljjf927BpKyRt6NfdQP539tP8s0wZsGq/+s9S79hucsDQkh0MoP0Ki3UO4g==
+  version "11.0.0-next-beta.318"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.0.0-next-beta.318.tgz#181ed3c445a851a68abf761d31a2d3984a65f5a0"
+  integrity sha512-R3IlUZqN3WKNNWsayMiVP6JqWVdyNSuwQmBQY7VqVepUBV210uo4GoFLv2vmmegOlHzgx9IUZG7u1grN1v1nAg==
 
 "@trpc/next@^11.0.0-next.327":
-  version "11.0.0-next.327"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-11.0.0-next.327.tgz#32e2f5a7794c5a19dd5cc073ef5e081e8e91e773"
-  integrity sha512-Ks/HRhBiAu46qn2YZxq/t7sllJyO2bktoGZT2g3g28ESK7WuGznbv/hIZYq0TlbPkP/AEQMjP7w9X86E5aG5lA==
+  version "11.0.0-next-beta.318"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-11.0.0-next-beta.318.tgz#b04f25f2589574a8bf52bca30f7c63b6a46052a2"
+  integrity sha512-qeWfJ1vPm7GchLmMZz5Gj+mBka0CRci0bCKEhGoG8RSvI/+9GbbhZHKRRDnlsN81CgexJ2e2nULET9ESO6rt+Q==
 
 "@trpc/react-query@^11.0.0-next.327":
-  version "11.0.0-next.327"
-  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.0.0-next.327.tgz#68b54fe5a9cf9cec9a29b9f376cb0328a33c3c4f"
-  integrity sha512-B077KFeI2APLVTsXdIMbArb8j7ZwgIE6vlvEKiM0q2cftckgKV0WclUYboZ9Ldd/AFJ8k8Lz92Ot3CroSUg5vA==
+  version "11.0.0-next-beta.318"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.0.0-next-beta.318.tgz#c7edf9695c5a68b4fa046c0ae3442bbf09a9dfda"
+  integrity sha512-T6l4+OuOkE4yylUqtT5EiLXo0M5+XW6YaKqnTCMkELQrrPmq3Ok0eKfhWy1Xk+ayx02POO9fTzNhITz3BID21Q==
 
 "@trpc/server@^11.0.0-next.327":
-  version "11.0.0-next.327"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.0.0-next.327.tgz#eede4d55b120cc69d92394f2fb945a25240f8bbc"
-  integrity sha512-Lw4knzW1z0RpiGjur5gU/d67pl1NEkpIokTefuPqb63FlWCfwfHG3FHfvOaNoQ1lt3xMlw/A+pAMeU/q8YWp4Q==
+  version "11.0.0-next-beta.318"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.0.0-next-beta.318.tgz#0ca3930870368734f2fb7eec9b9ff7dd769709e8"
+  integrity sha512-lxwWfqgv3LvIfhagCElDtNEY6C2sQU3o43OH0vn9hQ+7o9j+JHwEZjZz1ixvm3wUZvwZ68LheXuKL9RdVn1d4w==
 
 "@types/aria-query@^5.0.1":
   version "5.0.4"
