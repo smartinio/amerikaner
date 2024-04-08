@@ -9,12 +9,13 @@ import { groupBySuit } from 'game/utils'
 import { last } from 'utils/last'
 import { mockRandom } from 'jest-mock-random'
 import { SocketEvent, updateClients } from 'game/emitter'
+import { createCallerFactory } from 'server/trpc'
 
 const mockDealCards = dealCards as jest.Mock
 jest.mock('game/dealCards')
 
 describe('app: happy flow', () => {
-  const caller = appRouter.createCaller({})
+  const caller = createCallerFactory(appRouter)({})
   let gameId = ''
   let ownerId = ''
   let ownerSecret = ''
@@ -105,11 +106,13 @@ describe('app: happy flow', () => {
 
       expect(isError(event)).toBe(false)
 
-      expect(event).toEqual(expect.objectContaining({
-        playerId: player.id,
-        playerSecret: player.secret,
-        gameId: game.id,
-      }))
+      expect(event).toEqual(
+        expect.objectContaining({
+          playerId: player.id,
+          playerSecret: player.secret,
+          gameId: game.id,
+        })
+      )
     })
 
     test('Player 1 can start the game', async () => {

@@ -9,3 +9,4 @@ const t = initTRPC.create()
 export const router = t.router
 export const publicProcedure = t.procedure
 export const createContext = initTRPC.context
+export const createCallerFactory = t.createCallerFactory
