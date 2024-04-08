@@ -7,7 +7,7 @@ Built with [Next.js](https://nextjs.org/) and [tRPC.](https://trpc.io)
 
 ## Setup
 ```shell
-yarn
-yarn dev
+pnpm
+pnpm dev
 open http://localhost:3000
 ```
