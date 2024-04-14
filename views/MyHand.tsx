@@ -11,7 +11,8 @@ import {
   DndContext,
   DragEndEvent,
   DragOverEvent,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   useDraggable,
   useDroppable,
   useSensor,
@@ -41,8 +42,9 @@ export const MyHand = () => {
   const playBindingTrickMutation = trpc.playBindingTrick.useMutation(mutationOptions)
   const playRegularTrickMutation = trpc.playRegularTrick.useMutation(mutationOptions)
 
-  const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 1 } })
-  const sensors = useSensors(pointerSensor)
+  const mouseSensor = useSensor(MouseSensor, { activationConstraint: { distance: 1 } })
+  const touchSensor = useSensor(TouchSensor, { activationConstraint: { distance: 1 } })
+  const sensors = useSensors(touchSensor, mouseSensor)
   const [isMobile] = useMediaQuery('(max-width: 600px)')
 
   useEffect(() => {
