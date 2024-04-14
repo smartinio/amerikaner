@@ -6,9 +6,10 @@ import { getCardSrc } from 'utils/card'
 interface PlayingCardProps {
   card: Card
   pulse?: boolean
+  trump?: boolean
 }
 
-export const PlayingCard = ({ card, pulse, ...boxProps }: PlayingCardProps & BoxProps) => {
+export const PlayingCard = ({ card, pulse, trump, ...boxProps }: PlayingCardProps & BoxProps) => {
   return (
     <Box {...boxProps} overflow="visible">
       <Flex
@@ -18,7 +19,7 @@ export const PlayingCard = ({ card, pulse, ...boxProps }: PlayingCardProps & Box
           animation: pulse ? 'pulse-red 1s infinite' : undefined,
         }}
       >
-        <Image alt={card.id} src={getCardSrc(card)} />
+        <Image alt={card.id} src={getCardSrc(card)} priority />
       </Flex>
     </Box>
   )

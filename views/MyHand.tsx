@@ -1,4 +1,12 @@
-import { Box, Button, Flex, HStack, SlideFade, useDisclosure } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  SlideFade,
+  useDisclosure,
+  useMediaQuery,
+} from '@chakra-ui/react'
 import {
   DndContext,
   DragEndEvent,
@@ -35,6 +43,7 @@ export const MyHand = () => {
 
   const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 1 } })
   const sensors = useSensors(pointerSensor)
+  const [isMobile] = useMediaQuery('(max-width: 600px)')
 
   useEffect(() => {
     switch (snapshot?.roundPhase) {
@@ -174,8 +183,8 @@ export const MyHand = () => {
       <Box minHeight={minHeight} maxHeight={maxHeight}>
         <Box position="fixed" bottom={0} left={0} right={0} ref={ref}>
           <SlideFade in={shouldFadeIn} offsetY="120px">
-            <Box paddingX="5" marginBottom="-14">
-              <HStack spacing="-20" opacity={canPlay ? 1 : 0.3}>
+            <Box paddingX="5" marginBottom={isMobile ? '-14' : '-24'}>
+              <HStack spacing="-20" opacity={canPlay ? 1 : 0.15}>
                 {sortedCards.map((card, idx) => (
                   <Flex
                     key={card.id}
@@ -202,6 +211,7 @@ export const MyHand = () => {
                           style={getCardStyle(card.id)}
                           onClick={() => handleCardClick(card)}
                           card={card}
+                          trump={card.suit === snapshot.trumpSuit}
                         />
                       </Box>
                     </Draggable>

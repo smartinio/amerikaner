@@ -22,7 +22,7 @@ import { PlayingCard } from 'views/PlayingCard'
 const AvatarBadge = (props: TagProps) => {
   return (
     <Box position="absolute" top={0} right={0} overflow="visible">
-      <Tag size="sm" borderRadius="full" {...props} boxShadow="0px 0px 5px rgba(0,0,0,0.25)" />
+      <Tag size="lg" borderRadius="full" {...props} boxShadow="0px 0px 5px rgba(0,0,0,0.25)" />
     </Box>
   )
 }
@@ -205,7 +205,7 @@ const Player = (props: {
             </AvatarBadge>
           ) : null}
           {roundPhase === 'bidding' && !player.folded && player.bid ? (
-            <AvatarBadge background={isHighest ? 'black' : 'gray.400'} color="white">
+            <AvatarBadge background={isHighest ? 'yellow' : 'gray.400'} color="black">
               {player.bid}
             </AvatarBadge>
           ) : null}

@@ -49,7 +49,7 @@ export const Game = ({ gameId, playerId, playerSecret }: Props) => {
   const keepAliveQuery = trpc.keepAlive.useQuery({ gameId, playerSecret })
 
   useEffect(() => {
-    if (isError(keepAliveQuery.data)) {
+    if (isError(keepAliveQuery.data) && error !== keepAliveQuery.data) {
       setError(keepAliveQuery.data)
     }
 
@@ -70,7 +70,7 @@ export const Game = ({ gameId, playerId, playerSecret }: Props) => {
       clearInterval(httpInterval)
       clearInterval(socketInterval)
     }
-  }, [keepAliveQuery])
+  }, [keepAliveQuery, error])
 
   if (!snapshot && error === Errors.FORBIDDEN) {
     return <Start />
@@ -97,7 +97,7 @@ export const Game = ({ gameId, playerId, playerSecret }: Props) => {
   keepAlive.current = true
 
   return (
-    <Flex bgGradient="linear(to-b, gray.200, gray.300)" h="100vh">
+    <Flex bgGradient="linear(to-b, gray.200, gray.300)" h="100vh" position="fixed" width="100%">
       <PreloadedCards />
       <Container marginTop="20">
         <TopControls />
@@ -114,7 +114,7 @@ const PreloadedCards = memo(function PreloadedCards() {
   return (
     <Box position="fixed" bottom={0} left={0} zIndex={-999} opacity={0}>
       {Object.entries(cards).map(([key, card]) => (
-        <Image key={key} src={card} alt={key} />
+        <Image key={key} src={card} alt={key} priority />
       ))}
     </Box>
   )

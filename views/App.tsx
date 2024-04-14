@@ -69,7 +69,10 @@ const App = ({ children }: any) => {
         <title>Amerikaner</title>
         <meta property="og:title" content="Amerikaner" />
         <meta name="robots" content="noindex" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="viewport"
+          content="minimum-scale=1.0, initial-scale=1.0, width=device-width, height=device-height,  maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
       <main className={font.className}>
         <ErrorBoundary>
