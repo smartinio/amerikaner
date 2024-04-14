@@ -52,7 +52,7 @@ export const MiddleArea = () => {
           size="md"
           colorScheme="green"
           onClick={startNewRound}
-          disabled={!canStart}
+          isDisabled={!canStart}
           borderRadius="full"
           boxShadow="0px 2px 20px rgba(0,0,0,0.2)"
         >

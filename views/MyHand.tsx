@@ -176,8 +176,13 @@ export const MyHand = () => {
           <SlideFade in={shouldFadeIn} offsetY="120px">
             <Box paddingX="5" marginBottom="-14">
               <HStack spacing="-20" opacity={canPlay ? 1 : 0.3}>
-                {sortedCards.map((card) => (
-                  <Flex key={card.id} direction="column" alignItems="center">
+                {sortedCards.map((card, idx) => (
+                  <Flex
+                    key={card.id}
+                    direction="column"
+                    alignItems="center"
+                    style={{ marginLeft: idx ? '-45px' : undefined }}
+                  >
                     <Box paddingBottom="5">
                       <Button
                         style={getButtonStyle(card.id)}
@@ -185,7 +190,7 @@ export const MyHand = () => {
                         variant="solid"
                         colorScheme="green"
                         borderRadius="3xl"
-                        disabled={!canPlay}
+                        isDisabled={!canPlay}
                         zIndex={card.id === selectedCard?.id ? undefined : -999}
                       >
                         Play

@@ -6,6 +6,8 @@ import {
   NumberDecrementStepper,
   Button,
   Flex,
+  Text,
+  SlideFade,
 } from '@chakra-ui/react'
 import { last } from 'utils/last'
 import { useEffect, useState } from 'react'
@@ -34,7 +36,9 @@ export const BiddingButtons = () => {
     return null
   }
 
-  const { playerSecret, gameId, isMyTurn } = snapshot
+  const { playerSecret, gameId, isMyTurn, currentPlayerId, players } = snapshot
+
+  const currentPlayerName = players.find((player) => player.id === currentPlayerId)?.name || ''
 
   const foldBid = () => {
     foldBidMutation.mutate({ playerSecret, gameId })
@@ -44,43 +48,40 @@ export const BiddingButtons = () => {
     placeBidMutation.mutate({ playerSecret, gameId, isAmerikaner: false, numTricks: bid })
   }
 
+  if (!isMyTurn) {
+    return (
+      <Text>
+        <strong>{currentPlayerName}</strong> is bidding...
+      </Text>
+    )
+  }
+
   return (
-    <Flex gap={2} direction="row">
-      <Button
-        colorScheme="red"
-        size="md"
-        onClick={foldBid}
-        disabled={!isMyTurn}
-        borderRadius="full"
-      >
-        Fold
-      </Button>
-      <NumberInput
-        min={minBid}
-        max={13}
-        allowMouseWheel
-        onChange={(_, value) => setBid(value)}
-        value={bid}
-        width={20}
-        size="md"
-        color="facebook.900"
-      >
-        <NumberInputField />
-        <NumberInputStepper>
-          <NumberIncrementStepper />
-          <NumberDecrementStepper />
-        </NumberInputStepper>
-      </NumberInput>
-      <Button
-        colorScheme="green"
-        size="md"
-        width="20"
-        onClick={placeBid}
-        disabled={!isMyTurn}
-        borderRadius="full"
-      >
-        Bid {bid}
-      </Button>
-    </Flex>
+    <SlideFade in offsetY={20}>
+      <Flex gap={2} direction="row">
+        <Button colorScheme="red" size="md" onClick={foldBid} borderRadius="full">
+          Fold
+        </Button>
+        <NumberInput
+          min={minBid}
+          max={13}
+          allowMouseWheel
+          onChange={(_, value) => setBid(value)}
+          value={bid}
+          width={20}
+          size="md"
+          color="facebook.900"
+        >
+          <NumberInputField />
+          <NumberInputStepper>
+            <NumberIncrementStepper />
+            <NumberDecrementStepper />
+          </NumberInputStepper>
+        </NumberInput>
+        <Button colorScheme="green" size="md" width="20" onClick={placeBid} borderRadius="full">
+          Bid {bid}
+        </Button>
+      </Flex>
+    </SlideFade>
   )
 }

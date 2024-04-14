@@ -86,7 +86,7 @@ export const ChoosePartnerModal = ({
             colorScheme="blue"
             mr={3}
             onClick={handleChoose}
-            disabled={!bindingCard}
+            isDisabled={!bindingCard}
             opacity={bindingCard ? 1 : 0.2}
           >
             Choose

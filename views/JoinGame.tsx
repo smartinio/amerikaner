@@ -83,7 +83,7 @@ export const JoinGame = () => {
           isInvalid={false}
         ></Input>
 
-        <Button onClick={joinGame} disabled={!gameId} isLoading={loading} isDisabled={loading}>
+        <Button onClick={joinGame} isDisabled={!gameId} isLoading={loading} isDisabled={loading}>
           Join game
         </Button>
       </VStack>
