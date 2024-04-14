@@ -6,7 +6,7 @@ const ee = new EventEmitter()
 
 export type SocketEvent = Snapshot | 'KICKED'
 
-type PlayerChannel = string & {__brand: 'PlayerChannel'}
+type PlayerChannel = string & { __brand: 'PlayerChannel' }
 
 export const getPlayerChannel = (player: Player) => `${player.id}:${player.secret}` as PlayerChannel
 
@@ -16,7 +16,7 @@ export const emitter = {
   },
   subscribe: (channel: PlayerChannel, handler: (snapshot: SocketEvent) => void) => {
     ee.on(channel, handler)
-    return () => ee.off('snapshot', handler)
+    return () => ee.off(channel, handler)
   },
 }
 
