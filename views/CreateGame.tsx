@@ -64,7 +64,7 @@ export const CreateGame = () => {
         ></Input>
         {playerNameError ? <FormErrorMessage>{playerNameError}</FormErrorMessage> : null}
 
-        <Text>Game name</Text>
+        <Text>Lobby name</Text>
         <Input
           type="text"
           value={gameName}

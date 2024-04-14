@@ -1,7 +1,7 @@
 import { Box, Code, Container, Flex, Spinner, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { trpc } from 'utils/trpc'
-import { Errors, isError } from 'shared/types'
+import { Errors, Snapshot, isError } from 'shared/types'
 import { dataHandler, defaultDataHandler } from 'utils/data'
 import { Start } from 'views/Start'
 import { useSnapshot, setSnapshot, useResults, setError, clearPlayerGame } from 'store'
@@ -29,22 +29,43 @@ export const Game = ({ gameId, playerId, playerSecret }: Props) => {
   // Will set to true further down
   keepAlive.current = false
 
+  const handleSnapshot = dataHandler((data: Snapshot | 'KICKED') => {
+    if (data === 'KICKED') {
+      clearPlayerGame()
+      router.push('/').then(() => alert('You were kicked from the game'))
+    } else {
+      setSnapshot(data)
+    }
+  }, setError)
+
   trpc.snapshotSubscription.useSubscription(
     { playerId, playerSecret, gameId },
     {
       onError: (error) => {
         console.error('Subscription error', error)
       },
-      onData: dataHandler((data) => {
-        if (data === 'KICKED') {
-          clearPlayerGame()
-          router.push('/').then(() => alert('You were kicked from the game'))
-        } else {
-          setSnapshot(data)
-        }
-      }, setError),
+      onData: handleSnapshot,
     }
   )
+
+  const snapshotQuery = trpc.snapshotQuery.useQuery(
+    { playerId, playerSecret, gameId },
+    { enabled: false }
+  )
+
+  useEffect(() => {
+    const listener = async () => {
+      if (document.visibilityState === 'visible') {
+        console.log('fetching snapshot manually')
+        const foo = await snapshotQuery.refetch()
+        foo.data && handleSnapshot(foo.data)
+      }
+    }
+
+    document.addEventListener('visibilitychange', listener)
+
+    return () => document.removeEventListener('visibilitychange', listener)
+  })
 
   const keepAliveQuery = trpc.keepAlive.useQuery({ gameId, playerSecret })
 

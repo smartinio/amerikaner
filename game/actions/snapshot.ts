@@ -23,9 +23,7 @@ export const snapshotQuery = publicProcedure
 
     const { game, player } = result
 
-    return {
-      snapshot: createSnapshot({ game, player }),
-    }
+    return createSnapshot({ game, player })
   })
 
 export const snapshotSubscription = publicProcedure
