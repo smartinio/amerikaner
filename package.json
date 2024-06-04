@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^15.0.0",
+    "@testing-library/react": "^16.0.0",
     "@types/canvas-confetti": "^1.6.4",
     "@types/jest": "^29.5.12",
     "@types/node": "20.11.30",
