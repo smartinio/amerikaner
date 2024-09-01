@@ -70,7 +70,7 @@ importers:
         version: 3.22.4
       zustand:
         specifier: ^4.4.7
-        version: 4.5.4(@types/react@18.2.73)(react@18.2.0)
+        version: 4.5.5(@types/react@18.2.73)(react@18.2.0)
     devDependencies:
       '@testing-library/jest-dom':
         specifier: ^6.1.4
@@ -330,6 +330,10 @@ packages:
 
   '@babel/runtime@7.25.0':
     resolution: {integrity: sha512-7dRy4DwXwtzBrPbZflqxnvfxLF8kdZXPkhymtDeFoFqE6ldzjQFgYTtYIFARcLEYDrqfBfYcZt1WqFxRoyC9Rw==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/runtime@7.25.6':
+    resolution: {integrity: sha512-VBj9MYyDb9tuLq7yzqjgzt6Q+IBQLrGZfdjOekyEirZPHxXWoTSGUTMrpsfi58Up73d13NfYLv8HT9vmznjzhQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.24.0':
@@ -3481,8 +3485,8 @@ packages:
       '@types/react':
         optional: true
 
-  use-sync-external-store@1.2.0:
-    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+  use-sync-external-store@1.2.2:
+    resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
@@ -3604,8 +3608,8 @@ packages:
   zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
 
-  zustand@4.5.4:
-    resolution: {integrity: sha512-/BPMyLKJPtFEvVL0E9E9BTUM63MNyhPGlvxk1XjrfWTUlV+BR8jufjsovHzrtR6YNcBEcL7cMHovL1n9xHawEg==}
+  zustand@4.5.5:
+    resolution: {integrity: sha512-+0PALYNJNgK6hldkgDq2vLrw5f6g/jCInz52n9RTpropGgeAf/ioFUCdtsjCqu4gNhW9D01rUQBROoRjdzyn2Q==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'
@@ -3826,6 +3830,10 @@ snapshots:
       regenerator-runtime: 0.14.1
 
   '@babel/runtime@7.25.0':
+    dependencies:
+      regenerator-runtime: 0.14.1
+
+  '@babel/runtime@7.25.6':
     dependencies:
       regenerator-runtime: 0.14.1
 
@@ -5040,7 +5048,7 @@ snapshots:
   '@testing-library/dom@10.1.0':
     dependencies:
       '@babel/code-frame': 7.24.7
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.6
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       chalk: 4.1.2
@@ -7690,7 +7698,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.2.73
 
-  use-sync-external-store@1.2.0(react@18.2.0):
+  use-sync-external-store@1.2.2(react@18.2.0):
     dependencies:
       react: 18.2.0
 
@@ -7818,9 +7826,9 @@ snapshots:
 
   zod@3.22.4: {}
 
-  zustand@4.5.4(@types/react@18.2.73)(react@18.2.0):
+  zustand@4.5.5(@types/react@18.2.73)(react@18.2.0):
     dependencies:
-      use-sync-external-store: 1.2.0(react@18.2.0)
+      use-sync-external-store: 1.2.2(react@18.2.0)
     optionalDependencies:
       '@types/react': 18.2.73
       react: 18.2.0
