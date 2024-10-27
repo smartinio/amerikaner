@@ -60,8 +60,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(react@18.2.0)
       uuid:
-        specifier: ^9.0.1
-        version: 9.0.1
+        specifier: ^11.0.0
+        version: 11.0.0
       ws:
         specifier: ^8.16.0
         version: 8.16.0
@@ -3529,8 +3529,8 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
-  uuid@9.0.1:
-    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+  uuid@11.0.0:
+    resolution: {integrity: sha512-iE8Fa5fgBY4rN5GvNUJ8TSwO1QG7TzdPfhrJczf6XJ6mZUxh/GX433N70fCiJL9h8EKP5ayEIo0Q6EBQGWHFqA==}
     hasBin: true
 
   v8-to-istanbul@9.2.0:
@@ -7767,7 +7767,7 @@ snapshots:
     dependencies:
       react: 18.2.0
 
-  uuid@9.0.1: {}
+  uuid@11.0.0: {}
 
   v8-to-istanbul@9.2.0:
     dependencies:
