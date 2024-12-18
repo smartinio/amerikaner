@@ -34,7 +34,7 @@
     "@trpc/server": "^11.0.0-next.327",
     "canvas-confetti": "^1.9.2",
     "framer-motion": "^11.0.8",
-    "next": "^14.1.0",
+    "next": "^14.2.15",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-no-ssr": "^1.1.0",
