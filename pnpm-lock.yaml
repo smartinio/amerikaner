@@ -95,7 +95,7 @@ importers:
         version: 18.2.23
       '@types/react-no-ssr':
         specifier: ^1.1.7
-        version: 1.1.7
+        version: 1.1.8
       '@types/uuid':
         specifier: ^9.0.8
         version: 9.0.8
@@ -318,6 +318,10 @@ packages:
 
   '@babel/runtime@7.26.0':
     resolution: {integrity: sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/runtime@7.26.7':
+    resolution: {integrity: sha512-AOPI3D+a8dXnja+iwsUqGRjr1BbZIe771sXdapOtYI531gSqpi92vXivKcq2asu/DFpdl1ceFAKZyRzK2PCVcQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.24.0':
@@ -965,8 +969,8 @@ packages:
   '@types/react-dom@18.2.23':
     resolution: {integrity: sha512-ZQ71wgGOTmDYpnav2knkjr3qXdAFu0vsk8Ci5w3pGAIdj7/kKAyn+VsQDhXsmzzzepAiI9leWMmubXz690AI/A==}
 
-  '@types/react-no-ssr@1.1.7':
-    resolution: {integrity: sha512-ccIthMjeaplgCSv5hNvMsP27RVYpga5E5Nog7nkNaMLkvw3Q4wfVHtJPel/SisNVoXr/6mI8O/gv8A58maipsA==}
+  '@types/react-no-ssr@1.1.8':
+    resolution: {integrity: sha512-0p3XxCvbkO463wB3qMF5MeT4Gfan3wH4MzFQZjo/6Yr4h0I1YtkDZyv/hhWI0DX0t1xCWQsLm0SxBCBDCZ09Yw==}
 
   '@types/react@18.2.73':
     resolution: {integrity: sha512-XcGdod0Jjv84HOC7N5ziY3x+qL0AfmubvKOZ9hJjJ2yd5EE+KYjWhdOjt387e9HPheHkdggF9atTifMRtyAaRA==}
@@ -3379,6 +3383,10 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
+  '@babel/runtime@7.26.7':
+    dependencies:
+      regenerator-runtime: 0.14.1
+
   '@babel/template@7.24.0':
     dependencies:
       '@babel/code-frame': 7.26.2
@@ -3970,7 +3978,7 @@ snapshots:
   '@testing-library/dom@10.1.0':
     dependencies:
       '@babel/code-frame': 7.26.2
-      '@babel/runtime': 7.26.0
+      '@babel/runtime': 7.26.7
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       chalk: 4.1.2
@@ -4100,7 +4108,7 @@ snapshots:
     dependencies:
       '@types/react': 18.2.73
 
-  '@types/react-no-ssr@1.1.7':
+  '@types/react-no-ssr@1.1.8':
     dependencies:
       '@types/react': 18.2.73
 
