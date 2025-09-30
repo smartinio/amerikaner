@@ -14,8 +14,8 @@
     "build:server": "rm -rf dist && NODE_OPTIONS=\"--max-old-space-size=8192\" tsc --p tsconfig.server.json",
     "build": "pnpm build:client && pnpm build:server",
     "start": "NODE_ENV=production node dist/server/index.js",
-    "test:game": "jest --testEnvironment=node --passWithNoTests --forceExit --testPathPattern=tests/server/",
-    "test:pages": "jest --testEnvironment=jsdom --passWithNoTests --forceExit --testPathPattern=tests/ui/",
+    "test:game": "jest --testEnvironment=node --passWithNoTests --forceExit --testPathPatterns=tests/server/",
+    "test:pages": "jest --testEnvironment=jsdom --passWithNoTests --forceExit --testPathPatterns=tests/ui/",
     "test:boot": "BOOT_TEST=1 pnpm start",
     "test": "pnpm test:game && pnpm test:pages",
     "lint": "next lint"
